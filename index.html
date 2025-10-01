@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title> gaaju paati </title>
+    <style>
+      body {
+        text-align: center;
+        margin-top: 30px;
+        font-family: "Courier", monospace;
+        background-image: url("strawberry.png");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        color: #8b4859;
+      }
+
+      img.responsive {
+        height: 400px;
+        width: auto;
+        padding: 10px;
+      }
+
+      #dateQuestion {
+        font-size: 50px;
+        margin-bottom: 10px;
+        color: #8b4859;
+      }
+
+      .answerButton {
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 10px;
+        cursor: pointer;
+        transition: transform 0.3s ease;
+        display: inline-block;
+        text-align: center;
+      }
+
+      .answerButton img {
+        height: 60px;
+        width: auto;
+        display: block;
+        border-radius: 12px;
+        box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+        margin: 0 auto;
+      }
+
+      .button-label {
+        color: #d63447;
+        font-size: 24px;
+        font-weight: bold;
+        margin-top: 8px;
+        font-family: "Courier", monospace;
+        text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+      }
+
+      .answerButton:hover {
+        transform: scale(1.05);
+      }
+
+      .flower-container {
+        position: relative;
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .hey-cutie {
+        color: #d63447;
+        font-size: 50px;
+        font-weight: bold;
+        margin-top: 10px;
+        font-family: "Courier", monospace;
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="flower-container">
+      <p class="hey-cutie"> Heyy Hangry Gingyy 👵🎀</p>
+    </div>
+    <div id="dateQuestion">
+      <b>hope this pisses you off even more BWAHHAHAHAHAHAAAHHAHA</b>
+    </div>
+    
+    <button class="answerButton" id="yesButton">
+      <img src="berry.jpg" alt="Yes" id="yesImg">
+      <div class="button-label">click strawberry</div>
+    </button>
+
+    <button class="answerButton" id="noButton">
+      <img src="oreos.jpg" alt="No" id="noImg">
+      <div class="button-label">click oreo</div>
+    </button>
+    
+    <br />
+    <img src="cat.gif" alt="cat asking question" class="responsive" />
+    
+    <script>
+      const yesButton = document.getElementById("yesButton");
+      const noButton = document.getElementById("noButton");
+      const yesImg = document.getElementById("yesImg");
+      const noImg = document.getElementById("noImg");
+
+      let yesHeight = 60;
+      let noHeight = 60;
+
+      function sendEmail(buttonClicked) {
+        const emailData = {
+          service_id: "service_bqjg0qi",
+          template_id: "template_8mvryzx",
+          user_id: "WxCXlNRViNJxx243N",
+          template_params: {
+            "to_name": "Venkatakrishnan",
+            "from_name": "Leah",
+            "button_clicked": buttonClicked
+          }
+        };
+
+        console.log("Sending email data:", emailData);
+
+        fetch("https://api.emailjs.com/api/v1.0/email/send", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(emailData)
+        })
+        .then(response => {
+          console.log("Response status:", response.status);
+          if (response.ok) {
+            console.log("Email sent successfully!");
+          } else {
+            response.text().then(text => {
+              console.error("Error response:", text);
+            });
+          }
+        })
+        .catch(error => {
+          console.error("Fetch error:", error);
+        });
+      }
+
+      yesButton.addEventListener("click", function(e) {
+        e.preventDefault();
+        yesHeight += 20;
+        yesImg.style.height = yesHeight + "px";
+        sendEmail("Berry (Yes) button");
+      });
+
+      noButton.addEventListener("click", function(e) {
+        e.preventDefault();
+        noHeight += 20;
+        noImg.style.height = noHeight + "px";
+        sendEmail("Oreos (No) button");
+      });
+    </script>
+  </body>
+</html>
